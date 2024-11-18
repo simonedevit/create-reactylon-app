@@ -4,12 +4,6 @@ const fs = require('fs-extra');
 const path = require('path');
 const { exec } = require('child_process');
 
-async function delay(ms) {
-    return new Promise(resolve => {
-        setTimeout(resolve, ms);
-    })
-}
-
 (async () => {
     const projectName = process.argv[2];
     if (!projectName) {
