@@ -22,33 +22,64 @@ const { exec } = require('child_process');
     const chalk = (await import('chalk')).default;
 
     console.log('');
-    const spinner = ora(`Creating a new Reactylon app in ${chalk.green(projectName)}.`).start();
-    fs.mkdirSync(projectPath);
 
-    try {
+    const isNative = process.argv[3];
 
-        await fs.copy(path.join(__dirname, '..', 'template'), path.join(projectPath));
+    // Reactylon Native
+    if (isNative){
 
-        const templatePackageJsonPath = path.join(__dirname, '..', 'template', 'package.json');
-        let packageJsonContent = fs.readFileSync(templatePackageJsonPath, 'utf-8');
-        packageJsonContent = packageJsonContent.replace(/{{projectName}}/g, projectName);
-        fs.writeFileSync(path.join(projectPath, 'package.json'), packageJsonContent);
+        const spinner = ora(`Creating a new Reactylon Native app in ${chalk.green(projectName)}.`).start();
 
-        spinner.succeed();
-
-        spinner.text = 'Installing packages. This might take a couple of minutes.';
-        spinner.start();
-        exec('npm install', { cwd: projectPath }, (error) => {
+        exec(`npx @react-native-community/cli@latest init ${projectName} --version 0.74.2 --skip-install --skip-git-init`, async(error) => {
             if (error) {
                 spinner.fail();
             }
+            await fs.remove(path.join(projectPath, 'App.tsx'));
+            await fs.copy(path.join(__dirname, '..', 'templates', 'reactylon-native'), path.join(projectPath));
             spinner.succeed();
-            console.log(`\nReactylon app successful created.`);
+
+            spinner.text = 'Installing packages. This might take a couple of minutes.';
+            spinner.start();
+            exec('npm i @babylonjs/core@7.30.0 @babylonjs/loaders@7.30.0 @babylonjs/react-native @babylonjs/react-native-iosandroid-0-71 react-native-permissions@^3.10.1 reactylon --save', { cwd: projectPath }, (error) => {
+                if (error) {
+                    spinner.fail();
+                }
+                spinner.succeed();
+
+                console.log(`\nReactylon Native app successful created.`);
+            });
         });
     }
-    catch (error) {
-        spinner.fail();
-        console.error(error);
-    }
 
+    // Reactylon
+    else {
+        const spinner = ora(`Creating a new Reactylon app in ${chalk.green(projectName)}.`).start();
+        fs.mkdirSync(projectPath);
+    
+        try {
+    
+            await fs.copy(path.join(__dirname, '..', 'templates', 'reactylon'), path.join(projectPath));
+    
+            const templatePackageJsonPath = path.join(__dirname, '..', 'templates', 'reactylon', 'package.json');
+            let packageJsonContent = fs.readFileSync(templatePackageJsonPath, 'utf-8');
+            packageJsonContent = packageJsonContent.replace(/{{projectName}}/g, projectName);
+            fs.writeFileSync(path.join(projectPath, 'package.json'), packageJsonContent);
+    
+            spinner.succeed();
+    
+            spinner.text = 'Installing packages. This might take a couple of minutes.';
+            spinner.start();
+            exec('npm install', { cwd: projectPath }, (error) => {
+                if (error) {
+                    spinner.fail();
+                }
+                spinner.succeed();
+                console.log(`\nReactylon app successful created.`);
+            });
+        }
+        catch (error) {
+            spinner.fail();
+            console.error(error);
+        }
+    }
 })();

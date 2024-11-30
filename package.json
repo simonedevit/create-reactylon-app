@@ -1,9 +1,12 @@
 {
   "name": "create-reactylon-app",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Create Reactylon app with no build configuration.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "url": "https://github.com/simonedevit/create-reactylon-app"
   },
   "bin": {
     "create-reactylon-app": "./bin/index.js"
@@ -26,5 +29,5 @@
     "chalk": "^5.3.0"
   },
   "author": "Simone De Vittorio",
-  "license": "AGPL-3.0-only"
+  "license": "MIT"
 }

@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@babylonjs/core": "7.30.0",
-    "reactylon": "^0.0.74",
+    "reactylon": "^1.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
