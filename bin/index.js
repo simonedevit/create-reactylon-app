@@ -33,6 +33,8 @@ const { exec } = require('child_process');
         exec(`npx @react-native-community/cli@latest init ${projectName} --version 0.74.2 --skip-install --skip-git-init`, async(error) => {
             if (error) {
                 spinner.fail();
+                console.log(error);
+                return;
             }
             await fs.remove(path.join(projectPath, 'App.tsx'));
             await fs.copy(path.join(__dirname, '..', 'templates', 'reactylon-native'), path.join(projectPath));
@@ -40,9 +42,11 @@ const { exec } = require('child_process');
 
             spinner.text = 'Installing packages. This might take a couple of minutes.';
             spinner.start();
-            exec('npm i @babylonjs/core@7.30.0 @babylonjs/loaders@7.30.0 @babylonjs/react-native @babylonjs/react-native-iosandroid-0-71 react-native-permissions@^3.10.1 reactylon --save', { cwd: projectPath }, (error) => {
+            exec('npm i @babylonjs/core@7.40.2 @babylonjs/loaders@7.40.2 @babylonjs/react-native @babylonjs/react-native-iosandroid-0-71 react-native-permissions@^3.10.1 reactylon --save', { cwd: projectPath }, (error) => {
                 if (error) {
                     spinner.fail();
+                    console.error(error);
+                    return;
                 }
                 spinner.succeed();
 
@@ -72,6 +76,8 @@ const { exec } = require('child_process');
             exec('npm install', { cwd: projectPath }, (error) => {
                 if (error) {
                     spinner.fail();
+                    console.error(error);
+                    return;
                 }
                 spinner.succeed();
                 console.log(`\nReactylon app successful created.`);
