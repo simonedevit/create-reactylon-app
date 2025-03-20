@@ -26,11 +26,11 @@ const { exec } = require('child_process');
     const isNative = process.argv[3];
 
     // Reactylon Native
-    if (isNative){
+    if (isNative) {
 
         const spinner = ora(`Creating a new Reactylon Native app in ${chalk.green(projectName)}.`).start();
 
-        exec(`npx @react-native-community/cli@latest init ${projectName} --version 0.74.2 --skip-install --skip-git-init`, async(error) => {
+        exec(`npx @react-native-community/cli@latest init ${projectName} --version 0.74.2 --skip-install --skip-git-init`, async (error) => {
             if (error) {
                 spinner.fail();
                 console.log(error);
@@ -42,7 +42,7 @@ const { exec } = require('child_process');
 
             spinner.text = 'Installing packages. This might take a couple of minutes.';
             spinner.start();
-            exec('npm i @babylonjs/core@7.40.2 @babylonjs/loaders@7.40.2 @babylonjs/react-native @babylonjs/react-native-iosandroid-0-71 react-native-permissions@^3.10.1 reactylon --save', { cwd: projectPath }, (error) => {
+            exec('npm i @babylonjs/core@7.40.2 @babylonjs/loaders@7.40.2 @babylonjs/react-native @babylonjs/react-native-iosandroid-0-71 react-native-permissions@^3.10.1 reactylon react-reconciler@0.29.2 --save', { cwd: projectPath }, (error) => {
                 if (error) {
                     spinner.fail();
                     console.error(error);
@@ -59,18 +59,18 @@ const { exec } = require('child_process');
     else {
         const spinner = ora(`Creating a new Reactylon app in ${chalk.green(projectName)}.`).start();
         fs.mkdirSync(projectPath);
-    
+
         try {
-    
+
             await fs.copy(path.join(__dirname, '..', 'templates', 'reactylon'), path.join(projectPath));
-    
+
             const templatePackageJsonPath = path.join(__dirname, '..', 'templates', 'reactylon', 'package.json');
             let packageJsonContent = fs.readFileSync(templatePackageJsonPath, 'utf-8');
             packageJsonContent = packageJsonContent.replace(/{{projectName}}/g, projectName);
             fs.writeFileSync(path.join(projectPath, 'package.json'), packageJsonContent);
-    
+
             spinner.succeed();
-    
+
             spinner.text = 'Installing packages. This might take a couple of minutes.';
             spinner.start();
             exec('npm install', { cwd: projectPath }, (error) => {
