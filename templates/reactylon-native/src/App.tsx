@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, View, StatusBar } from 'react-native';
 import { NativeEngine } from 'reactylon/mobile';
 import { Scene } from 'reactylon';
-import { ArcRotateCamera, Camera } from '@babylonjs/core';
+import type { ArcRotateCamera, Camera } from '@babylonjs/core';
 import Content from './Content';
 
 const App = () => {

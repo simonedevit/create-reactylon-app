@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Mesh, ArcRotateCamera, Tools } from '@babylonjs/core';
+import type { Mesh, ArcRotateCamera } from '@babylonjs/core';
+import { Tools } from '@babylonjs/core/Misc/tools';
 import { useScene } from 'reactylon';
 
 const Content: React.FC = () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Engine } from 'reactylon/web';
 import { Scene } from 'reactylon';
 import Content from './Content';
-import { HavokPlugin } from '@babylonjs/core';
+import { HavokPlugin } from '@babylonjs/core/Physics/v2/Plugins/havokPlugin';
 
 type AppProps = {
     havok: unknown;

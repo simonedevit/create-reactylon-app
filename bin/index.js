@@ -48,9 +48,17 @@ const { exec } = require('child_process');
                     console.error(error);
                     return;
                 }
-                spinner.succeed();
 
-                console.log(`\nReactylon Native app successful created.`);
+                exec('npm i babel-plugin-reactylon --save-dev --force', { cwd: projectPath }, (devError) => {
+                    if (devError) {
+                        spinner.fail();
+                        console.error(devError);
+                        return;
+                    }
+
+                    spinner.succeed();
+                    console.log(`\nReactylon Native app successful created.`);
+                });
             });
         });
     }
