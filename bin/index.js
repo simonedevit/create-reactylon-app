@@ -42,7 +42,7 @@ const { exec } = require('child_process');
 
             spinner.text = 'Installing packages. This might take a couple of minutes.';
             spinner.start();
-            exec('npm i @babylonjs/core@^8.0.0 @babylonjs/loaders@^8.0.0 @babylonjs/react-native @babylonjs/react-native-iosandroid-0-71 react-native-permissions@^3.10.1 reactylon react-reconciler@0.29.2 --save --force', { cwd: projectPath }, (error) => {
+            exec('npm i @babylonjs/core@8.3.0 @babylonjs/loaders@8.3.0 @babylonjs/react-native @babylonjs/react-native-iosandroid-0-71 react-native-permissions@^3.10.1 reactylon react-reconciler@0.29.2 --save --force', { cwd: projectPath }, (error) => {
                 if (error) {
                     spinner.fail();
                     console.error(error);
