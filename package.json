@@ -1,6 +1,6 @@
 {
   "name": "create-reactylon-app",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Create Reactylon app with no build configuration.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
