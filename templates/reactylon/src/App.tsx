@@ -11,7 +11,7 @@ type AppProps = {
 const App: React.FC<AppProps> = ({ havok }) => {
 
     return (
-        <Engine antialias>
+        <Engine>
             <Scene onSceneReady={scene => scene.createDefaultCameraOrLight(true, undefined, true)} physicsOptions={{
                 plugin: new HavokPlugin(true, havok)
             }}>
